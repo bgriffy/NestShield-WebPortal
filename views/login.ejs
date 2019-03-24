@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Welcome to Firebase Hosting</title>
+
+    <!-- update the version number as needed -->
+    <script defer src="/__/firebase/5.9.0/firebase-app.js"></script>
+    <!-- firebase scripts -->
+    <script defer src="/__/firebase/5.9.0/firebase-auth.js"></script>
+    <script defer src="/__/firebase/5.9.0/firebase-database.js"></script>
+    <script defer src="/__/firebase/5.9.0/firebase-storage.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.9.0/firebase.js"></script>
+    <!-- initialize the SDK after all desired features are loaded -->
+    <script defer src="/__/firebase/init.js"></script>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css?family=Laila" rel="stylesheet">
+      </head>
+      <body>
+    
+        <!--Bootstrap Navbar-->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+          <a class="navbar-brand" href="">NestShield</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class ="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="">Pricing</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="">Contact</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="">Download</a>
+                </li>
+            </ul>
+          </div>
+        </nav>
+        <!--Intro Section-->
+        <div id="login-top">
+          <h1>NestShield</h1>
+          <p>helping you to protect them while they're still in the nest.</p>
+        </div>
+    
+        <div class = "middle-container">
+          <!-- form for logging in -->
+          <div id = "login-form">
+            <h3 id="form-head">Please sign in</h3>
+            <div id = "login-box">
+              <input type="email" id="user-email" class="form-control" placeholder="Email address">
+              <input type="password" id="user-password" class="form-control" placeholder="Password">
+            </div>
+            <input type="checkbox" value="remember-me form"> Remember Credentials<br>
+            <button id="login-btn" class="btn btn-small">Sign in</button>
+            <button id="signup-btn" class="btn btn-small">Sign up</button>
+          </div>
+        </div>
+    
+        <!-- <img class="nest" src="https://image.flaticon.com/icons/svg/376/376300.svg" alt="nest-img"> -->
+    
+        <!--Footer Section-->
+        <div class="bottom-container login-footer">
+          <a class="footer-link" href="https://www.facebook.com">FaceBook</a>
+          <a class="footer-link" href="https://twitter.com">Twitter</a>
+          <p>© 2019 NestShield.</p>
+        </div>
+    
+        <!-- jQuery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    
+        <!-- Bootstrap stuff -->
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    
+        <!-- client-side script file -->
+        <script src="app.js" charset="utf-8"></script>
+    
+      </body>
+    </html>
+  </head>
+  <body>
