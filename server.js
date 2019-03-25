@@ -31,9 +31,19 @@ app.use(bodyParser.urlencoded({ extended: false }));
     route requests
 */
 
-//request from user to view root
+//request to view root page
 app.get('/', function(req, res){
+    res.render("landing.ejs");
+});
+
+//request to view login page
+app.get('/login', function(req, res){
     res.render("login.ejs");
+});
+
+//request to view home page (dashboard)
+app.get('/index', function(req, res){
+    res.render("index.ejs");
 });
 
 

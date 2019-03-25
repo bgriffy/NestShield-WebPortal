@@ -45,10 +45,30 @@ firebase.auth().onAuthStateChanged(fireBaseUser => {
   if(fireBaseUser)
   {
     console.log(fireBaseUser);
-    window.location = "landing.html";
+    //window.location = "/index";
     alert("You are logged in.")
     alert("UID: " + fireBaseUser.uid);
+    let uid = fireBaseUser.uid; 
+    //get a reference to the database
+    let database = firebase.database();
+    let ref = database.ref("users/" + uid).child("devices"); 
+    ref.on("value", gotData, errData);
+    
   }
   else
     alert("You are not logged in.");
 });
+
+
+function gotData(data)
+{ 
+  let currentDevice = Object.keys(data.val())[0];
+  return(currentDevice);
+}
+
+function errData(error)
+{
+  console.log("Error!");
+  console.log(error);
+}
+
