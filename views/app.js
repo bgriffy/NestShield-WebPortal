@@ -1,3 +1,4 @@
+
 (function()
 {
 //Initialize Firebase
@@ -45,60 +46,10 @@ firebase.auth().onAuthStateChanged(fireBaseUser => {
   if(fireBaseUser)
   {
     console.log(fireBaseUser);
-    //window.location = "/index";
+    window.location = "/index";
     // alert("You are logged in.")
     // alert("UID: " + fireBaseUser.uid);
-    
-    let uid = fireBaseUser.uid; 
-    //get a reference to the database
-    let database = firebase.database();
-    //get a data snapshot of the users devices
-    let ref = database.ref("users").child(uid).child("devices"); 
-    /* 
-      This block of code includes a nested query. First we retrieve
-      the device ID, then we use that device ID inside the nested
-      query which retrives the whitelist entry corresponding to the
-      specific device. We repeat this process for every device the
-      user has.  
-    */
-    ref.once("value")
-    //query device list
-    .then(function(data){
-      currentDevice = Object.keys(data.val())[0];
-      console.log("current device: " + currentDevice); 
-      let deviceRef = database.ref("devices/").child(currentDevice).child("whitelist_entries");
-      deviceRef.once("value")
-      //nested query for whitelist entries  
-      .then(function(snap){
-        snap.forEach(function(childSnapshot) {
-          var entryName = childSnapshot.val();
-          whiteList.push(entryName); 
-        });
-        //print array for testing purposes
-        whiteList.forEach(function(entryName) {
-          console.log(entryName);
-        });
-      })   
-    })
   }
   else
     console.log("You are not logged in.");
 });
-
-
-
-
-function getData(data, callback)
-{ 
-  currentDevice = Object.keys(data.val())[0];
-  console.log("current device: " + currentDevice); 
-  return (callback);
-}
-
-
-function errData(error)
-{
-  console.log("Error!");
-  console.log(error);
-}
-

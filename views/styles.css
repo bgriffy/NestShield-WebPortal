@@ -87,6 +87,7 @@ hr {
   text-decoration: none;
   position: relative;
   top: 20px;
+  margin-bottom: 20px;
 }
 .btn:hover {
   background: #393e46;
@@ -97,6 +98,21 @@ hr {
 }
 .login-footer{
   position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+.wl-table{
+  margin: 0px auto;
+  text-align: center;
+}
+.table{
+  max-width: 150px;
+  text-align: center;
+  margin-left: 250px;
+  background-color: #ffffff;
+}
+.stay-bottom {
+  position: absolute;
   bottom: 0;
   width: 100%;
 }
@@ -122,4 +138,7 @@ hr {
 }
 #login-top {
   margin-bottom: 100px;
+}
+#content-wrap {
+  padding-bottom: 300px;    /* Footer height */
 }
