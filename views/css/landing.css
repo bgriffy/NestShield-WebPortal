@@ -34,7 +34,7 @@ hr {
   width: 100px;
 }
 /**************class selectors***********/
-.top-container, #login-top {
+.top-container {
   background-color: #f95959;
   position: relative;
   padding: 20px 0;
@@ -70,7 +70,6 @@ hr {
 }
 .contact-us {
   padding-bottom: 70px;
-
 }
 .footer-link {
   padding: 0 30px;
@@ -96,49 +95,4 @@ hr {
 .feature-link:hover {
   color: #393e46;
 }
-.login-footer{
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-}
-.wl-table{
-  margin: 0px auto;
-  text-align: center;
-}
-.table{
-  max-width: 150px;
-  text-align: center;
-  margin-left: 250px;
-  background-color: #ffffff;
-}
-.stay-bottom {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-}
 /**************id selectors***********/
-#login-form{
-  text-align: center;
-  position: relative;
-  top: 25%;
-  left: 50%;
-  /* bring your own prefixes */
-  transform: translate(-50%, -50%);
-  width: 100%;
-  max-width: 330px;
-}
-#login-box{
-  padding: 5px 0;
-}
-#register-btn{
-  padding-top: 100px;
-}
-#form-head{
-  font-weight: bold;
-}
-#login-top {
-  margin-bottom: 100px;
-}
-#content-wrap {
-  padding-bottom: 300px;    /* Footer height */
-}

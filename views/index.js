@@ -52,7 +52,7 @@ firebase.auth().onAuthStateChanged(fireBaseUser => {
         //print array for testing purposes
         
         let printEntries ="<div class ='wl-table w-50'>"
-        + "<table class='table table-sm'>"
+        + "<table class='table'>"
         + "<thead class='thead-dark'>"
         + "<tr>"
         + "<th scope='col'>Process</th>"

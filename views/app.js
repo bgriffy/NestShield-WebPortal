@@ -21,7 +21,7 @@ const loginBtn = document.getElementById("login-btn");
 const signUpBtn = document.getElementById("signup-btn");
 
 //automatically sign user out for testing purposes
-// firebase.auth().signOut();
+firebase.auth().signOut();
 
 //Add event for login button
 loginBtn.addEventListener("click", function(){
