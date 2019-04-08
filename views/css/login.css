@@ -62,7 +62,7 @@ body {
     top: 20px;
     margin-bottom: 20px;
   }
-  .btn:hover {
+  .btn:hover{
     background: #393e46;
     text-decoration: none;
   }
@@ -77,11 +77,14 @@ body {
     width: 100%;
     max-width: 330px;
   }
-  #login-box{
+  #login-box #register-box{
     padding: 5px 0;
   }
   #register-btn{
     padding-top: 100px;
+  }
+  #signup-login-btn:hover{
+    color: #393e46;
   }
   #form-head{
     font-weight: bold;
@@ -89,4 +92,13 @@ body {
   #login-top {
     margin-bottom: 100px;
   }
-  
+  #register-form{
+    text-align: center;
+    position: relative;
+    top: 25%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    max-width: 330px;
+    padding-top: 50px;
+  }

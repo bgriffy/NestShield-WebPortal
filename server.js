@@ -41,6 +41,11 @@ app.get('/login', function(req, res){
     res.render("login.ejs");
 });
 
+//request to view registration page
+app.get('/registration', function(req, res){
+    res.render("registration.ejs");
+});
+
 //request to view home page (dashboard)
 app.get('/index', function(req, res){
     res.render("index.ejs");

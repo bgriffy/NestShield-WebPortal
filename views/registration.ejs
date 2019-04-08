@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>NestShield Login</title>
+    <title>NestShield Registration</title>
     <!--Head scripts-->
     <% include partials/head %>
     <link rel="stylesheet" href="css/login.css">
@@ -22,15 +22,17 @@
     <!--Main Content-->
     <div class = "middle-container">
       <!-- form for logging in -->
-      <div id = "login-form">
-        <h3 id="form-head">Please sign in</h3>
-        <div id = "login-box">
+      <div id = "register-form">
+        <h3 id="form-head">Register for a NestShield Account</h3>
+        <div id = "register-box">
+          <input type="email" id="user-name" class="form-control" placeholder="Full name">
           <input type="email" id="user-email" class="form-control" placeholder="Email address">
           <input type="password" id="user-password" class="form-control" placeholder="Password">
+          <input type="password" id="user-confirm-password" class="form-control" placeholder="Confirm password">
         </div>
         <input type="checkbox" value="remember-me form"> Remember Credentials<br>
-        <button id="login-btn" class="btn btn-small">Sign in</button>
-        <p>Don't have an account? <a id="signup-login-btn" href="/registration">Sign Up</a></p>
+        <button id="signUpBtn" class="btn btn-small">Sign up</button>
+        <p>Already have an account? <a id="signup-login-btn" href="/login">Login</a></p>
       </div>
     </div>
     
