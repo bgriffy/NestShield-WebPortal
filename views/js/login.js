@@ -32,15 +32,8 @@ loginBtn.addEventListener("click", function(){
   promise.catch(e => console.log(e.message));
 });
 
-//Add event for sign up button
-signUpBtn.addEventListener("click", function(){
-  let uEmail = userEmail.value;
-  let uPassword = userPass.value;
-  //create user account
-  let promise = firebase.auth().createUserWithEmailAndPassword(uEmail, uPassword);
-  promise.catch(e => console.log(e.message));
-});
 let whiteList = [];
+
 //add a realtime authentication listener
 firebase.auth().onAuthStateChanged(fireBaseUser => {
   if(fireBaseUser)
