@@ -48,7 +48,6 @@ a:hover {
   font-family: Arial, sans-serif;
   padding: 40px 0;
   position: absolute;
-  bottom: 0;
   width: 100%;
 }
 .nest {
@@ -81,19 +80,13 @@ a:hover {
   background: #393e46;
   text-decoration: none;
 }
-.wl-table{
-  margin: 0px auto;
+.table{  
   text-align: center;
-}
-.table{
-  
-  max-width: 150px;
-  text-align: center;
-  margin-left: 25%;
-  margin-right: 25%;
-  margin-top: 50px;
   background-color: #ffffff;
-  border-color: #f95959;
+}
+
+.wl-table{
+  margin: 50px 25%;
 }
 .thead-dark {
   height: 75px;
