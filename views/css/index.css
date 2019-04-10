@@ -80,14 +80,25 @@ a:hover {
   background: #393e46;
   text-decoration: none;
 }
+
+.tab-btn{
+  margin: 50px;
+}
 .table{  
   text-align: center;
   background-color: #ffffff;
 }
 
-.wl-table{
-  margin: 50px 25%;
+.container{
+  margin-top: 50px;
 }
+.tab-content{
+  margin-top: 25px;
+}
+
+/* .wl-table{
+  margin: 50px 25%;
+} */
 .thead-dark {
   height: 75px;
 }

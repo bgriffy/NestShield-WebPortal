@@ -51,6 +51,11 @@ app.get('/index', function(req, res){
     res.render("index.ejs");
 });
 
+//request to view home page (dashboard)
+app.get('/test', function(req, res){
+    res.render("test.ejs");
+});
+
 
 // //authentication middleware
 // function isAuthenticated(req, res, next)
