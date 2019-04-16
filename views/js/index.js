@@ -15,6 +15,7 @@
 
 //arrays to store database information 
 let devices = [];
+let deviceNames = [];
 let accounts = [];
 let childrenNames = [];
 let childProfiles = []; 
@@ -48,7 +49,7 @@ firebase.auth().onAuthStateChanged(fireBaseUser => {
         ref.once("value").then(function(data){
             
             devices = Object.keys(data.val());
-            
+            deviceNames = Object.values(data.val());
             //loop through each device
             devices.forEach(function(currentDevice){
                 console.log("current device from loop: " + currentDevice);
@@ -77,13 +78,22 @@ firebase.auth().onAuthStateChanged(fireBaseUser => {
                             childrenNames.push(childProfile.profileName);
                     })
 
-                    //send tab headers (child names) to HTML
+                    //send child-name tab headers to HTML
                     childrenNames.forEach(function(childName){
                         printHead += "<li><a class = 'tab-btn' data-toggle='tab' href='#" + childName + "'>" + childName + "</a></li>";
                     });
-                    $(document).find('#tabHead').html(printHead);
+                    $(document).find('#childTabs').html(printHead);
+                    printHead = "";
+
+                    //send device-name tab headers to HTML
+                    deviceNames.forEach(function(deviceName){
+                        printHead += "<li><a class = 'tab-btn' data-toggle='tab' href='#" + deviceName + "'>" + deviceName + "</a></li>";
+                    });
+                    $(document).find('#deviceTabs').html(printHead);
 
                     let tabClass = "' class='contentTab tab-pane fade show active'>";
+
+                    
 
                     //send child profiles to HTML
                     childProfiles.forEach(function(childProfile){
