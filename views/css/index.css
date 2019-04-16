@@ -92,8 +92,11 @@ a:hover {
 .container{
   margin-top: 50px;
 }
-.tab-content{
-  margin-top: 25px;
+.contentTab.tab-pane {
+  display: none;
+}
+.contentTab.active {
+  display: block;
 }
 
 /* .wl-table{
@@ -105,4 +108,8 @@ a:hover {
 /**************id selectors***********/
 #inner-wrap {
   padding-bottom: 300px;    /* Footer height */
+}
+#tab-content{
+  margin-top: 25px;
+  max-height: 50px;
 }

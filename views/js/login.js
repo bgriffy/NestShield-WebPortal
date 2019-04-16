@@ -39,7 +39,7 @@ firebase.auth().onAuthStateChanged(fireBaseUser => {
   if(fireBaseUser)
   {
     console.log(fireBaseUser);
-    window.location = "/index";
+    window.location = "/test";
     // alert("You are logged in.")
     // alert("UID: " + fireBaseUser.uid);
   }
