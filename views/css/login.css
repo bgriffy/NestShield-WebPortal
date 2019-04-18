@@ -4,7 +4,7 @@ body {
     text-align: center;
     position: relative;
     font-family: 'Arial', sans-serif;
-    background-color: #e3e3e3;
+    background-color: #B4F9FF;
   }
   h1 {
     margin-top: 0;
@@ -12,32 +12,32 @@ body {
     font-family: 'Laila', serif;
   }
   h3 {
-    color: #f95959;
+    color: #64864A;
     font-family: 'Laila', serif;
     font-size: 18px;
   }
   a {
-    color: #f95959;
+    color: #64864A;
     text-decoration: none;
     font-size: 19px;
   }
   a:hover {
-    color: #e3e3e3;
+    color: #C9B59A;
   }
   /**************class selectors***********/
   .top-container {
-    background-color: #f95959;
+    background-color: #B4F9FF;
     position: relative;
     padding: 20px 0;
     font-weight: bold;
     margin-bottom: 125px;
   }
   .middle-container {
-    background-color: #e3e3e3;
+    background-color: #B4F9FF;
     padding-bottom: 60px;
   }
   .bottom-container {
-    background-color: #393e46;
+    background-color: #C0A886;
     color: #eeeeee;
     font-family: Arial, sans-serif;
     padding: 40px 0;
@@ -47,6 +47,10 @@ body {
   }
   .footer-link {
     padding: 0 30px;
+    color: #B4F9FF;
+  }
+  .footer-link:hover {
+    color: #64864A;
   }
   .btn {
     -webkit-border-radius: 8;
@@ -55,7 +59,7 @@ body {
     font-family: Arial;
     color: #ffffff;
     font-size: 14px;
-    background: #f95959;
+    background: #64864A;
     padding: 5px;
     text-decoration: none;
     position: relative;
@@ -63,8 +67,23 @@ body {
     margin-bottom: 20px;
   }
   .btn:hover{
-    background: #393e46;
+    background: #C9B59A;
     text-decoration: none;
+  }
+  .navbar-custom{
+    background-color: #64864A;
+    color: #ffffff;
+  }
+  .navbar-custom .navbar-brand,
+  .navbar-custom .navbar-text {
+      color: #ffffff;
+  }
+  .navbar-custom .navbar-nav .nav-link {
+    color: #ffffff;
+  }
+  .navbar-custom .nav-item:hover .nav-link, 
+  .navbar-custom .navbar-brand:hover {
+      color: #B4F9FF;
   }
   /**************id selectors***********/
   #login-form{
@@ -76,6 +95,7 @@ body {
     transform: translate(-50%, -50%);
     width: 100%;
     max-width: 330px;
+    background-color: #B4F9FF;
   }
   #login-box #register-box{
     padding: 5px 0;
@@ -84,10 +104,11 @@ body {
     padding-top: 100px;
   }
   #signup-login-btn:hover{
-    color: #393e46;
+    color: #C9B59A;
   }
   #form-head{
     font-weight: bold;
+    color: #776E4E;
   }
   #login-top {
     margin-bottom: 100px;

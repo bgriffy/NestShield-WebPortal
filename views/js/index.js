@@ -93,17 +93,15 @@ firebase.auth().onAuthStateChanged(fireBaseUser => {
 
                     let tabClass = "' class='contentTab tab-pane fade show active'>";
 
-                    
-
                     //send child profiles to HTML
                     childProfiles.forEach(function(childProfile){
                         printEntries += "<div id='" + childProfile.profileName + tabClass
-                        + "<table class='table'>"
-                        + "<thead class='thead-dark'>"
+                        + "<table class='table table-striped'>"
+                        + "<thead class='thead'>"
                         + "<tr>"
                         + "<th scope='col'>Process</th>"
                         + "<th scope='col'></th>"
-                        + "<th scope='col'></th>"
+                        + "<th scope='col'>Options</th>"
                         + "<th scope='col'></th>"
                         + "</tr>"
                         + "</thead>"
@@ -112,7 +110,7 @@ firebase.auth().onAuthStateChanged(fireBaseUser => {
                         tabClass = "' class='contentTab tab-pane fade'>";
                         childProfile.whiteList.forEach(function(entryName){
                             printEntries += "<tr>" 
-                            + "<th scope='row'>"+entryName+"</th>"
+                            + "<td>"+entryName+"</td>"
                             + "<td><button type='button' class='btn btn-secondary btn-sm'>Monitor</button></td>"
                             + "<td><button type='button' class='btn btn-secondary btn-sm'>Restrict</button></td>"
                             + "<td><button type='button' class='btn btn-secondary btn-sm'>Delete</button></td>"

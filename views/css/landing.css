@@ -14,38 +14,38 @@ h1 {
 h2 {
   font-family: 'Laila', serif;
   font-weight: bold;
-  color: #393e46;
+  color: #776E4E;
   font-size: 32px;
 }
 h3 {
-  color: #f95959;
+  color: #64864A;
   font-family: 'Laila', serif;
   font-size: 18px;
 }
 a {
-  color: #f95959;
+  color: #7BABAE;
   text-decoration: none;
   font-size: 19px;
 }
 a:hover {
-  color: #e3e3e3;
+  color: #B4F9FF;
 }
 hr {
   width: 100px;
 }
 /**************class selectors***********/
 .top-container {
-  background-color: #f95959;
+  background-color: #B4F9FF;
   position: relative;
   padding: 20px 0;
   font-weight: bold;
 }
 .middle-container {
-  background-color: #e3e3e3;
+  background-color: #ffffff;
   padding-bottom: 60px;
 }
 .bottom-container {
-  background-color: #393e46;
+  background-color: #C0A886;
   color: #eeeeee;
   font-family: Arial, sans-serif;
   padding: 40px 0;
@@ -53,9 +53,9 @@ hr {
 .nest {
   position: relative;
   top: 7px;
-  height: 200px;
-  width: 200px;
-  background-color: #f95959;
+  height: 300px;
+  width: auto;
+  background-color: #B4F9FF;
   border-radius: 100%;
   padding: 5px;
 }
@@ -63,6 +63,7 @@ hr {
   height: 100px;
   width: 100px;
   margin-top: 30px;
+  margin-bottom: 20px;
 }
 .features-pic {
   height: 75px;
@@ -73,6 +74,11 @@ hr {
 }
 .footer-link {
   padding: 0 30px;
+  color: #B4F9FF;
+}
+.footer-link:hover {
+  padding: 0 30px;
+  color: #64864A;
 }
 .btn {
   -webkit-border-radius: 8;
@@ -81,7 +87,7 @@ hr {
   font-family: Arial;
   color: #ffffff;
   font-size: 14px;
-  background: #f95959;
+  background: #64864A;
   padding: 5px;
   text-decoration: none;
   position: relative;
@@ -89,10 +95,29 @@ hr {
   margin-bottom: 20px;
 }
 .btn:hover {
-  background: #393e46;
+  background: #B4F9FF;
   text-decoration: none;
 }
 .feature-link:hover {
-  color: #393e46;
+  color: #776E4E;
 }
+.bottom-container{
+  background-color: #C0A886;
+}
+.navbar-custom{
+  background-color: #64864A;
+  color: #ffffff;
+}
+.navbar-custom .navbar-brand,
+.navbar-custom .navbar-text {
+    color: #ffffff;
+}
+.navbar-custom .navbar-nav .nav-link {
+  color: #ffffff;
+}
+.navbar-custom .nav-item:hover .nav-link, 
+.navbar-custom .navbar-brand:hover {
+    color: #B4F9FF;
+}
+
 /**************id selectors***********/

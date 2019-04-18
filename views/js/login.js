@@ -1,4 +1,3 @@
-
 (function()
 {
 //Initialize Firebase
@@ -39,7 +38,7 @@ firebase.auth().onAuthStateChanged(fireBaseUser => {
   if(fireBaseUser)
   {
     console.log(fireBaseUser);
-    window.location = "/test";
+    window.location = "/index";
     // alert("You are logged in.")
     // alert("UID: " + fireBaseUser.uid);
   }

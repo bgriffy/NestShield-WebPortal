@@ -81,8 +81,9 @@ firebase.auth().onAuthStateChanged(fireBaseUser => {
                     childrenNames.forEach(function(childName){
                         printHead += "<li><a class = 'tab-btn' data-toggle='tab' href='#" + childName + "'>" + childName + "</a></li>";
                     });
-                    $(document).find('#tabHead').html(printHead);
+                    $(document).find('#childTabs').html(printHead);
 
+                    
                     let tabClass = "' class='contentTab tab-pane fade show active'>";
 
                     //send child profiles to HTML
