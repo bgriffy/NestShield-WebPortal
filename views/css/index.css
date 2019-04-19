@@ -26,6 +26,11 @@ a {
 a:hover {
   color: #B4F9FF;
 }
+hr{
+  height: 12px;
+  border: 0;
+  box-shadow: inset 0 12px 12px -12px rgba(0, 0, 0, 0.5);
+}
 
 /**************class selectors***********/
 .top-container {
@@ -102,13 +107,13 @@ a:hover {
 .navbar-custom .navbar-brand:hover {
     color: #B4F9FF;
 }
-
-/* .wl-table{
-  margin: 50px 25%;
-} */
-.thead-dark {
-  height: 75px;
+.dropLink{
+  font-size: 16px;
 }
+.childHeader{
+  margin:0 50px;
+}
+
 /**************id selectors***********/
 #inner-wrap {
   padding-bottom: 300px;    /* Footer height */
@@ -126,5 +131,9 @@ a:hover {
   margin-top: 50px;
   font-family: 'Laila', serif;
   font-weight: bold;
+}
+
+#dropLink:hover{
+  color: rgb(139, 185, 104);
 }
 

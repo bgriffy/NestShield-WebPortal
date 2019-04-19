@@ -23,10 +23,6 @@
             <!-- Children name headers go here-->
         </ul>
 
-        <ul id ="deviceTabs" class="nav nav-tabs justify-content-center">
-            <!-- Children name headers go here-->
-        </ul>
-
         <div id="tab-content">
             <!--Contents in each tab go here-->
         </div>
@@ -45,5 +41,13 @@
 
     <!-- client-side script file -->
     <script src="js/index.js" charset="utf-8"></script>
+    
+    <!--Bootstrap tab fix script-->
+    <script>
+     $(document).on('click','a.dropLink',function(){
+        console.log("button clicked...");
+        $("a.dropLink").removeClass("active");
+      });
+    </script>
   </body>
 </html>

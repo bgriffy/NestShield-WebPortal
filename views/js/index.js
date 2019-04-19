@@ -22,6 +22,8 @@ let childProfiles = [];
 let thisAccount = "";
 let printHead = ""; 
 let printEntries = "";
+let index = 0;
+let lastDevice = false; 
 
 //first, make sure user is logged in 
 firebase.auth().onAuthStateChanged(fireBaseUser => {
@@ -54,6 +56,10 @@ firebase.auth().onAuthStateChanged(fireBaseUser => {
             devices.forEach(function(currentDevice){
                 console.log("current device from loop: " + currentDevice);
                 
+                if(index == devices.length-1)
+                    lastDevice = true; 
+                index++; 
+
                 //get a data snapshot of the accounts associated with the device 
                 let childRef = database.ref("devices/").child(currentDevice).child("accounts")
                 childRef.once("value").then(function(snapshot){
@@ -69,6 +75,7 @@ firebase.auth().onAuthStateChanged(fireBaseUser => {
                             profileName: snapshot.child(currentAcct).child("ProfileName").val(),
                             whiteList: Object.values((snapshot.child(currentAcct).child("whitelist_entries").val())),
                             listSize: snapshot.child(currentAcct).child("whitelist_size").val(),
+                            deviceName: snapshot.child(currentAcct).child("DeviceName").val()
                         };
                         
                         childProfiles.push(childProfile);
@@ -78,51 +85,75 @@ firebase.auth().onAuthStateChanged(fireBaseUser => {
                             childrenNames.push(childProfile.profileName);
                     })
 
+                    if(lastDevice == false)
+                        return; 
+
                     //send child-name tab headers to HTML
                     childrenNames.forEach(function(childName){
-                        printHead += "<li><a class = 'tab-btn' data-toggle='tab' href='#" + childName + "'>" + childName + "</a></li>";
+                        let childDiv = childName + "Div";
+                        let childElem = document.getElementById(childDiv);
+                        //check to make sure childs name not listed already
+                        if(childElem == null)
+                        {
+                            printHead = "<div class ='childHeader' id = '" + childDiv + "'</div>";
+                            document.getElementById('childTabs').innerHTML += printHead;
+                        }
+                        printHead = "<ul class='nav nav-tabs'>"
+                            + "<li class = 'dropdown'>"
+                            + "<a data-toggle='dropdown' class='dropdown-toggle' href='#'>"
+                            + childName + "</a>"
+                            + "<ul class='dropdown-menu'>"
+                            childProfiles.forEach(function(childProfile){
+                                if(childProfile.profileName == childName)
+                                {
+                                    printHead += "<li><a class = 'dropLink' data-toggle='tab' href='#" 
+                                    + childProfile.deviceName + "-"
+                                    + childProfile.profileName + "'>"
+                                    + childProfile.deviceName
+                                    + "</a></li>";
+                                }
+                            });
+                            printHead += "</ul></li></ul>";
+                            document.getElementById(childDiv).innerHTML = printHead;
                     });
-                    $(document).find('#childTabs').html(printHead);
-                    printHead = "";
-
-                    //send device-name tab headers to HTML
-                    deviceNames.forEach(function(deviceName){
-                        printHead += "<li><a class = 'tab-btn' data-toggle='tab' href='#" + deviceName + "'>" + deviceName + "</a></li>";
-                    });
-                    $(document).find('#deviceTabs').html(printHead);
 
                     let tabClass = "' class='contentTab tab-pane fade show active'>";
 
                     //send child profiles to HTML
                     childProfiles.forEach(function(childProfile){
-                        printEntries += "<div id='" + childProfile.profileName + tabClass
-                        + "<table class='table table-striped'>"
-                        + "<thead class='thead'>"
-                        + "<tr>"
-                        + "<th scope='col'>Process</th>"
-                        + "<th scope='col'></th>"
-                        + "<th scope='col'>Options</th>"
-                        + "<th scope='col'></th>"
-                        + "</tr>"
-                        + "</thead>"
-                        + "<tbody>";
-                        
-                        tabClass = "' class='contentTab tab-pane fade'>";
-                        childProfile.whiteList.forEach(function(entryName){
-                            printEntries += "<tr>" 
-                            + "<td>"+entryName+"</td>"
-                            + "<td><button type='button' class='btn btn-secondary btn-sm'>Monitor</button></td>"
-                            + "<td><button type='button' class='btn btn-secondary btn-sm'>Restrict</button></td>"
-                            + "<td><button type='button' class='btn btn-secondary btn-sm'>Delete</button></td>"
-                            + "</tr>";
-                        });
-    
-                        printEntries += "</tbody>"
-                        +"</table>"
-                        +"</div>"
+                        let whiteListDiv = childProfile.deviceName + "-" + childProfile.profileName;
+                        let whiteListElem = document.getElementById(whiteListDiv);
+                        if(whiteListElem == null)
+                        {
+                            printEntries += "<div id='" + whiteListDiv + tabClass
+                            + "<table class='table table-striped'>"
+                            + "<thead class='thead'>"
+                            + "<tr>"
+                            + "<th scope='col'>Process</th>"
+                            + "<th scope='col'></th>"
+                            + "<th scope='col'>Options</th>"
+                            + "<th scope='col'></th>"
+                            + "</tr>"
+                            + "</thead>"
+                            + "<tbody>";
+                            
+                            tabClass = "' class='contentTab tab-pane fade'>";
+                            childProfile.whiteList.forEach(function(entryName){
+                                
+                                printEntries += "<tr>" 
+                                + "<td>"+entryName+"</td>"
+                                + "<td><button type='button' class='btn btn-secondary btn-sm'>Monitor</button></td>"
+                                + "<td><button type='button' class='btn btn-secondary btn-sm'>Restrict</button></td>"
+                                + "<td><button type='button' class='btn btn-secondary btn-sm'>Delete</button></td>"
+                                + "</tr>";
+                            });
+        
+                            printEntries += "</tbody>"
+                            +"</table>"
+                            +"</div>"
+                        }
                 });
                 $(document).find('#tab-content').html(printEntries);
-
                 });  
             });
         });
