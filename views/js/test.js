@@ -17,10 +17,13 @@
 let devices = [];
 let accounts = [];
 let childrenNames = [];
-let childProfiles = []; 
+let childProfiles = [];
+
+//useful variables
 let thisAccount = "";
 let printHead = ""; 
 let printEntries = "";
+let androidDevice = false; 
 
 //first, make sure user is logged in 
 firebase.auth().onAuthStateChanged(fireBaseUser => {
@@ -53,8 +56,18 @@ firebase.auth().onAuthStateChanged(fireBaseUser => {
             devices.forEach(function(currentDevice){
                 console.log("current device from loop: " + currentDevice);
                 
+                let childRef = database.ref("devices/").child(currentDevice)
+                childRef.once("value").then(function(snapshot){
+                    if (snapshot.hasChild("type")) {
+                        console.log(currentDevice + "is an android device.")
+                        androidDevice = true; 
+                      }
+                });
+                
+                if(androidDevice == false)
+                {
                 //get a data snapshot of the accounts associated with the device 
-                let childRef = database.ref("devices/").child(currentDevice).child("accounts")
+                childRef = database.ref("devices/").child(currentDevice).child("accounts")
                 childRef.once("value").then(function(snapshot){
                     
                     //get list of the accounts
@@ -116,7 +129,7 @@ firebase.auth().onAuthStateChanged(fireBaseUser => {
                 });
                 $(document).find('#tab-content').html(printEntries);
 
-                });  
+                });}  
             });
         });
     }

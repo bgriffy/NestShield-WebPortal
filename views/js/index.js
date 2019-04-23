@@ -24,6 +24,7 @@ let printHead = "";
 let printEntries = "";
 let index = 0;
 let lastDevice = false; 
+let androidDevice = false; 
 
 //first, make sure user is logged in 
 firebase.auth().onAuthStateChanged(fireBaseUser => {
@@ -60,30 +61,61 @@ firebase.auth().onAuthStateChanged(fireBaseUser => {
                     lastDevice = true; 
                 index++; 
 
-                //get a data snapshot of the accounts associated with the device 
-                let childRef = database.ref("devices/").child(currentDevice).child("accounts")
+                //----android devices----
+                let childRef = database.ref("devices/").child(currentDevice)
                 childRef.once("value").then(function(snapshot){
-                    
-                    //get list of the accounts
-                    accounts = Object.keys(snapshot.val());
-                    
-                    //loop through each account   
-                    accounts.forEach(function(currentAcct){
-                        
+                    if (snapshot.hasChild("type")) {
+                        androidDevice = true; 
                         //store child profile info into JS object, insert into profile array
                         let childProfile = {
-                            profileName: snapshot.child(currentAcct).child("ProfileName").val(),
-                            whiteList: Object.values((snapshot.child(currentAcct).child("whitelist_entries").val())),
-                            listSize: snapshot.child(currentAcct).child("whitelist_size").val(),
-                            deviceName: snapshot.child(currentAcct).child("DeviceName").val()
+                            profileName: snapshot.child("child_name").val(),
+                            whiteList: Object.values((snapshot.child("whitelist_entries").val())),
+                            deviceName: snapshot.child("child_name").val() + "'s Android device"
                         };
+
+                        console.log("childProfile: " + childProfile);
                         
                         childProfiles.push(childProfile);
 
                         //store childs name into array
                         if(!childrenNames.includes(childProfile.profileName))
                             childrenNames.push(childProfile.profileName);
-                    })
+                      }
+                    else
+                      androidDevice = false; 
+                });
+
+
+                //get a data snapshot of the accounts associated with Windows devices 
+                if(androidDevice == false)
+                    childRef = database.ref("devices/").child(currentDevice).child("accounts"); 
+                
+                childRef.once("value").then(function(snapshot){
+                    
+                    if(androidDevice == false)
+                    {   
+                        console.log("current device from snap:" + currentDevice);
+                        //get list of the accounts
+                        accounts = Object.keys(snapshot.val());
+                        
+                        //loop through each account   
+                        accounts.forEach(function(currentAcct){
+                            
+                            //store child profile info into JS object, insert into profile array
+                            let childProfile = {
+                                profileName: snapshot.child(currentAcct).child("ProfileName").val(),
+                                whiteList: Object.values((snapshot.child(currentAcct).child("whitelist_entries").val())),
+                                listSize: snapshot.child(currentAcct).child("whitelist_size").val(),
+                                deviceName: snapshot.child(currentAcct).child("DeviceName").val()
+                            };
+                            
+                            childProfiles.push(childProfile);
+
+                            //store childs name into array
+                            if(!childrenNames.includes(childProfile.profileName))
+                                childrenNames.push(childProfile.profileName);
+                        });
+                    }
 
                     if(lastDevice == false)
                         return; 
