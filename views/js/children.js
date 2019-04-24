@@ -148,28 +148,37 @@ function displayChild(childProfiles, childrenNames, deviceType, deviceID)
     //send each device entry to HTML
     childProfiles.forEach(function(childProfile){
 
-        //data attribute for delete button
-        if(deviceType == "android")
-            deleteData = "id='android-delete-btn'"
-        else
+        if($("#"+childProfile.profileName).length == 0)
         {
-            deleteData = "id='windows-delete-btn'"
-            + "data-userID = '" + childProfile.accountID + "'"
-        }
-       
-        deleteData += "data-deviceID = '" + deviceID + "'"
+            //data attribute for delete button
+            if(deviceType == "android")
+                deleteData = "id='android-delete-btn'"
+            else
+            {
+                deleteData = "id='windows-delete-btn'"
+                + "data-userID = '" + childProfile.accountID + "'"
+            }
+        
+            deleteData += "data-deviceID = '" + deviceID + "'"
 
-        printEntries += "<tr>" 
-        + "<td>"+childProfile.profileName+"</td>"
-        //begin delete button
-        + "<td><button type='button' class='btn btn-secondary btn-sm'"
-        + deleteData
-        + ">Delete</button></td>"
-        //end delete button
-        + "</tr>";
+            printEntries += "<tr>" 
+            + "<td id = '"+childProfile.profileName+"'>"
+            +childProfile.profileName+"</td>"
+            //begin delete button
+            + "<td><button type='button' class='btn btn-secondary btn-sm'"
+            + deleteData
+            + ">Delete</button></td>"
+            //end delete button
+            + "</tr>";
+
+            printEntries += "</tbody></table>";
+            document.getElementById('children-table').innerHTML = printEntries;
+            deleteData = "";
+            printEntries = "";
+        }
     });
-    printEntries += "</tbody></table>";
-    document.getElementById('children-table').innerHTML += printEntries;
+    
+    
 }
 
 //function to remove a specified whitelist entry
