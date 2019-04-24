@@ -51,7 +51,7 @@ firebase.auth().onAuthStateChanged(fireBaseUser => {
             printEntries = "<table class='table table-striped'>"
             + "<thead class='thead'>"
             + "<tr>"
-            + "<th scope='col'>Device Name</th>"
+            + "<th scope='col'>Childs Name</th>"
             + "<th scope='col'></th>"
             + "</tr>"
             + "</thead>"
@@ -110,3 +110,31 @@ function removeDevice(db, deviceID, userID)
         console.log("Device removal from Devices failed: " + error.message)
     });
 }
+
+
+devices = Object.entries(data.val());
+    printEntries = "<table class='table table-striped'>"
+    + "<thead class='thead'>"
+    + "<tr>"
+    + "<th scope='col'>Childs Name</th>"
+    + "<th scope='col'></th>"
+    + "</tr>"
+    + "</thead>"
+    + "<tbody>";
+
+    //send each device entry to HTML
+    devices.forEach(function(device){
+
+        //data attribute for delete button
+        deleteData = "id='device-delete-btn'"
+        + "data-deviceID = '" + device[0] + "'"
+
+        printEntries += "<tr>" 
+        + "<td>"+device[1]+"</td>"
+        //begin delete button
+        + "<td><button type='button' class='btn btn-secondary btn-sm'"
+        + deleteData
+        + ">Delete</button></td>"
+        //end delete button
+        + "</tr>";
+});

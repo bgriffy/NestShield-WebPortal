@@ -61,6 +61,11 @@ app.get('/devices', function(req, res){
     res.render("devices.ejs");
 });
 
+//request to view child-management page
+app.get('/children', function(req, res){
+    res.render("children.ejs");
+});
+
 
 // //authentication middleware
 // function isAuthenticated(req, res, next)
