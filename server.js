@@ -51,9 +51,14 @@ app.get('/index', function(req, res){
     res.render("index.ejs");
 });
 
-//request to view home page (dashboard)
+//request to view test page (strictly for development)
 app.get('/test', function(req, res){
     res.render("test.ejs");
+});
+
+//request to view device-management page
+app.get('/devices', function(req, res){
+    res.render("devices.ejs");
 });
 
 
