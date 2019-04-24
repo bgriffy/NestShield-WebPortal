@@ -24,7 +24,8 @@ let printHead = "";
 let printEntries = "";
 let index = 0;
 let lastDevice = false; 
-let androidDevice = false; 
+let androidDevice = false;
+let windowsRef = ""; 
 
 //first, make sure user is logged in 
 firebase.auth().onAuthStateChanged(fireBaseUser => {
@@ -62,9 +63,10 @@ firebase.auth().onAuthStateChanged(fireBaseUser => {
                 index++; 
 
                 //----android devices----
-                let childRef = database.ref("devices/").child(currentDevice)
-                childRef.once("value").then(function(snapshot){
+                let androidRef = database.ref("devices/").child(currentDevice)
+                androidRef.once("value").then(function(snapshot){
                     if (snapshot.hasChild("type")) {
+                        console.log("test");
                         androidDevice = true; 
                         //store child profile info into JS object, insert into profile array
                         let childProfile = {
@@ -88,11 +90,11 @@ firebase.auth().onAuthStateChanged(fireBaseUser => {
 
                 //get a data snapshot of the accounts associated with Windows devices 
                 if(androidDevice == false)
-                    childRef = database.ref("devices/").child(currentDevice).child("accounts"); 
+                    windowsRef = database.ref("devices/").child(currentDevice).child("accounts"); 
                 
-                childRef.once("value").then(function(snapshot){
+                windowsRef.once("value").then(function(snapshot){
                     
-                    if(androidDevice == false)
+                    if (snapshot.exists())
                     {   
                         console.log("current device from snap:" + currentDevice);
                         //get list of the accounts
@@ -186,6 +188,7 @@ firebase.auth().onAuthStateChanged(fireBaseUser => {
                         }
                 });
                 $(document).find('#tab-content').html(printEntries);
+                androidDevice = false;
                 });  
             });
         });
