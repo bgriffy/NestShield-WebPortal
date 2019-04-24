@@ -27,7 +27,6 @@ let printEntries = "";
 let index = 0;
 let lastDevice = false; 
 let androidDevice = false;
-let windowsRef = ""; 
 let hasAndroid = false;
 
 //first, make sure user is logged in 
@@ -41,14 +40,13 @@ firebase.auth().onAuthStateChanged(fireBaseUser => {
     else
     {
         /* 
-        This block of code includes a nested query. First we retrieve
-        the device ID, then we use that device ID inside the nested
-        query. The nested query retrieves all the info relevant to a 
-        childs profile (profile name, whitelist, whitelistSize). For 
-        windows, it does this for every account associated with a device. 
-        We then repeat this whole process for every device the user has.  
+        This block of code includes two nested queries. First we retrieve
+        the device ID, then we use that device ID inside each of the nested
+        queries. The nested queries retrieve all the info relevant to a 
+        childs profile (profile name, whitelist, whitelistSize). One query
+        is for android devices and the other is for windows devices. 
         */
-        console.log("You are logged in.");
+       
         let uid = fireBaseUser.uid; 
         let database = firebase.database();
 
@@ -74,8 +72,9 @@ firebase.auth().onAuthStateChanged(fireBaseUser => {
                         //store child profile info into JS object, insert into profile array
                         let childProfile = {
                             profileName: snapshot.child("child_name").val(),
-                            whiteList: Object.values((snapshot.child("whitelist_entries").val())),
-                            deviceName: snapshot.child("child_name").val() + "-Android", 
+                            whiteList: Object.entries((snapshot.child("whitelist_entries").val())),
+                            deviceName: snapshot.child("child_name").val() + "-Android",
+                            deviceID: currentDevice, 
                             androidDevice: true
                         };
                         
@@ -87,14 +86,15 @@ firebase.auth().onAuthStateChanged(fireBaseUser => {
                         
                         if(lastDevice == false)
                             return; 
-                        
-                        displayWL(childProfiles, childrenNames, "android", hasAndroid);
+                        console.log("currentDevice in Android: " + currentDevice);
+                        console.log("deviceID in Android: " + childProfile.deviceID);
+                        displayWL(childProfiles, childrenNames, "android", hasAndroid, childProfile.deviceID);
                     }
                 });
                 
 
                 //----windows devices----
-                windowsRef = database.ref("devices/").child(currentDevice).child("accounts"); 
+                let windowsRef = database.ref("devices/").child(currentDevice).child("accounts"); 
                 windowsRef.once("value").then(function(snapshot){
                     
                     if (snapshot.exists())
@@ -108,9 +108,11 @@ firebase.auth().onAuthStateChanged(fireBaseUser => {
                             //store child profile info into JS object, insert into profile array
                             let childProfile = {
                                 profileName: snapshot.child(currentAcct).child("ProfileName").val(),
-                                whiteList: Object.values((snapshot.child(currentAcct).child("whitelist_entries").val())),
+                                whiteList: Object.entries((snapshot.child(currentAcct).child("whitelist_entries").val())),
                                 listSize: snapshot.child(currentAcct).child("whitelist_size").val(),
-                                deviceName: snapshot.child(currentAcct).child("DeviceName").val()
+                                deviceName: snapshot.child(currentAcct).child("DeviceName").val(),
+                                deviceID: currentDevice, 
+                                accountID: currentAcct
                             };
                             
                             childProfiles.push(childProfile);
@@ -123,18 +125,48 @@ firebase.auth().onAuthStateChanged(fireBaseUser => {
 
                     if(lastDevice == false)
                         return; 
-                    displayWL(childProfiles, childrenNames, "windows");
-                });  
+                    displayWL(childProfiles, childrenNames, "windows", currentDevice);
+                    snapshot.child("child_name").val();
+                }); 
             });
+
         });
+        
+        //reset everything
+        devices = [];
+        deviceNames = [];
+        accounts = [];
+        childrenNames = [];
+        childProfiles = []; 
+        thisAccount = "";
+        printHead = ""; 
+        printEntries = "";
+        index = 0;
+        lastDevice = false; 
+        androidDevice = false;
+        hasAndroid = false;
+
+        //event listener for windows delete buttons 
+        $(document).on('click','#windows-delete-btn',function(){
+            console.log("delete button clicked...");
+            let deviceID = $(this).attr('data-deviceID');
+            let entryID = $(this).attr('data-entryID');
+            let accountID = $(this).attr('data-accountID');
+            console.log("deviceID: " + deviceID);
+            console.log("entryID: " + entryID);
+            console.log("accountID: " + accountID);
+            removeFromWL(database, deviceID, entryID, accountID); 
+            $(this).closest('tr').remove();
+          });
     }
 })
 
-//function to display whitelists for devices
-function displayWL(childProfiles, childrenNames, deviceType)
+//function to display whitelist for each device
+function displayWL(childProfiles, childrenNames, deviceType, currentDevice)
 {   
     let hasAndroid = false; 
     let tabClass = ""; 
+    deleteData =  "id='android-delete-btn'"
     //send child-name tab headers to HTML
     childrenNames.forEach(function(childName){
         
@@ -165,13 +197,16 @@ function displayWL(childProfiles, childrenNames, deviceType)
             });
             printHead += "</ul></li></ul>";
             if(deviceType == "windows")
-                document.getElementById(childDiv).innerHTML += printHead;
+                document.getElementById(childDiv).innerHTML = printHead;
             else
                 document.getElementById(childDiv).innerHTML = printHead;  
     });
     
     //default device will be the first device
-    tabClass = "' class='contentTab tab-pane active'>";
+    if(deviceType == "android")
+        tabClass = "' class='contentTab tab-pane active'>";
+    else
+        tabClass = "' class='contentTab tab-pane'>";
 
     //send child profiles to HTML
     childProfiles.forEach(function(childProfile){
@@ -192,13 +227,28 @@ function displayWL(childProfiles, childrenNames, deviceType)
             + "<tbody>";
             
             tabClass = "' class='contentTab tab-pane'>";
-            childProfile.whiteList.forEach(function(entryName){
-                
+
+            childProfile.whiteList.forEach(function(entry){
+
+                //only assign button data to windows devices
+                //used for delete button event listener
+                if(deviceType == "windows")
+                {   
+                    deleteData = "id='windows-delete-btn'"
+                    + "data-accountID = '" + childProfile.accountID + "'"
+                    + "data-deviceID = '" + childProfile.deviceID + "'"
+                    + "data-entryID = '" + entry[0] + "'";
+                }
+
                 printEntries += "<tr>" 
-                + "<td>"+entryName+"</td>"
+                + "<td>"+entry[1]+"</td>"
                 + "<td><button type='button' class='btn btn-secondary btn-sm'>Monitor</button></td>"
                 + "<td><button type='button' class='btn btn-secondary btn-sm'>Restrict</button></td>"
-                + "<td><button type='button' class='btn btn-secondary btn-sm'>Delete</button></td>"
+                //begin delete button
+                + "<td><button type='button' class='btn btn-secondary btn-sm'"
+                + deleteData
+                + ">Delete</button></td>"
+                //end delete button
                 + "</tr>";
             });
 
@@ -206,8 +256,23 @@ function displayWL(childProfiles, childrenNames, deviceType)
             +"</table>"
             +"</div>"
         }
+        printHead = "";
     });
 
     document.getElementById('tab-content').innerHTML = printEntries;
     androidDevice = false;
+}
+
+//function to remove a specified whitelist entry
+function removeFromWL(db, deviceID, entryID, userName)
+{
+    ref = db.ref("devices").child(deviceID).child("accounts").child(userName)
+    .child("whitelist_entries").child(entryID);
+    
+    ref.remove().then(function() {
+        console.log("WhiteList entry removal successful.")
+    })
+    .catch(function(error) {
+        console.log("WhiteList entry removal failed: " + error.message)
+    });
 }
