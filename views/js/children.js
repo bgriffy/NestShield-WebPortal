@@ -29,6 +29,7 @@ let index = 0;
 let lastDevice = false; 
 let androidDevice = false;
 let hasAndroid = false;
+let headWritten = false;
 
 //first, make sure user is logged in 
 firebase.auth().onAuthStateChanged(fireBaseUser => {
@@ -67,7 +68,7 @@ firebase.auth().onAuthStateChanged(fireBaseUser => {
                             profileName: snapshot.child("child_name").val(),
                             deviceName: snapshot.child("child_name").val() + "-Android",
                             deviceID: currentDevice, 
-                            androidDevice: true
+                            deviceType: "android"
                         };
                         
                         childProfiles.push(childProfile);
@@ -80,10 +81,9 @@ firebase.auth().onAuthStateChanged(fireBaseUser => {
                             return; 
                         console.log("currentDevice in Android: " + currentDevice);
                         console.log("deviceID in Android: " + childProfile.deviceID);
-                        displayChild(childProfiles, childrenNames, "android", hasAndroid, childProfile.deviceID);
+                        displayChildren(childrenNames);
                     }
                 });
-                
 
                 //----windows devices----
                 let windowsRef = database.ref("devices/").child(currentDevice).child("accounts"); 
@@ -102,7 +102,8 @@ firebase.auth().onAuthStateChanged(fireBaseUser => {
                                 profileName: snapshot.child(currentAcct).child("ProfileName").val(),
                                 deviceName: snapshot.child(currentAcct).child("DeviceName").val(),
                                 deviceID: currentDevice, 
-                                accountID: currentAcct
+                                accountID: currentAcct,
+                                deviceType: "windows"
                             };
                             
                             childProfiles.push(childProfile);
@@ -115,73 +116,67 @@ firebase.auth().onAuthStateChanged(fireBaseUser => {
 
                     if(lastDevice == false)
                         return; 
-                    displayChild(childProfiles, childrenNames, "windows", currentDevice);
+                    displayChildren(childrenNames);
                 });
                 
                 //event listener for windows delete buttons 
-                $(document).on('click','#windows-delete-btn',function(){
-                    console.log("Windows delete button clicked...");
-                    let deviceID = $(this).attr('data-deviceID');
-                    let userID = $(this).attr('data-userID');
-                    console.log("deviceID:" + deviceID);
-                    console.log("uid:" + uid);
-                    console.log("accountID:" + userID);
-                    // removeDevice(database, deviceID, uid);
+                $(document).on('click','#delete-btn',function(){
+                    let childName = $(this).attr('data-childName');
+                    console.log("delete button clicked...");
+                    console.log("childName: " + childName);
+                    removeChild(database, childProfiles, childName);
                     $(this).closest('tr').remove();
                 }); 
             });
-        });
+             
+        });//end of promise
     }
+    
 })
 
-function displayChild(childProfiles, childrenNames, deviceType, deviceID)
-{
-    printEntries = "<table class='table table-striped'>"
-    + "<thead class='thead'>"
-    + "<tr>"
-    + "<th scope='col'>Child Name</th>"
-    + "<th scope='col'></th>"
-    + "</tr>"
-    + "</thead>"
-    + "<tbody>";
-
-    //send each device entry to HTML
-    childProfiles.forEach(function(childProfile){
-
-        if($("#"+childProfile.profileName).length == 0)
+//function to display children in a table format
+function displayChildren(childrenNames){   
+    
+    printEntries = "";
+    childrenNames.forEach(function(childName){
+        if($("#"+childName).length == 0)
         {
-            //data attribute for delete button
-            if(deviceType == "android")
-                deleteData = "id='android-delete-btn'"
-            else
-            {
-                deleteData = "id='windows-delete-btn'"
-                + "data-userID = '" + childProfile.accountID + "'"
-            }
-        
-            deleteData += "data-deviceID = '" + deviceID + "'"
-
             printEntries += "<tr>" 
-            + "<td id = '"+childProfile.profileName+"'>"
-            +childProfile.profileName+"</td>"
-            //begin delete button
-            + "<td><button type='button' class='btn btn-secondary btn-sm'"
-            + deleteData
+            + "<td id = '"+childName+"'>" 
+            + childName + "</td>"
+            + "<td><button id = 'delete-btn' type='button' class='btn btn-secondary btn-sm'"
+            + "data-childName = '" + childName + "'"
             + ">Delete</button></td>"
-            //end delete button
             + "</tr>";
-
-            printEntries += "</tbody></table>";
-            document.getElementById('children-table').innerHTML = printEntries;
-            deleteData = "";
-            printEntries = "";
         }
     });
-    
-    
+    document.getElementById('children-table').innerHTML += printEntries;   
 }
 
-//function to remove a specified whitelist entry
+//function to remove all instances of a child from DB
+function removeChild(db, childProfiles, childName){
+    childProfiles.forEach(function(childProfile){
+        if(childProfile.profileName == childName)
+        {   
+            console.log("Phyllis was found...");
+            //next remove device from Devices node
+            if(childProfile.deviceType == "android")
+                ref = db.ref("devices").child(childProfile.deviceID);
+            else
+                ref = db.ref("devices").child(childProfile.deviceID).child("accounts")
+                .child(childProfile.accountID);
+            ref.remove().then(function() {
+                console.log("Device successfully removed from Devices node.")
+            })
+            .catch(function(error) {
+                console.log("Device removal from Devices failed: " + error.message)
+            });
+        }
+    });
+
+}
+
+// function to remove a specified whitelist entry
 // function removeDevice(db, deviceID, userID)
 // {   
 //     //first remove the device from Users node
