@@ -207,7 +207,7 @@ function displayWL(childProfiles, childrenNames, deviceType, currentDevice)
     });
     
     //default device will be the first device
-    if(deviceType == "android")
+    if(deviceType == "windows")
         tabClass = "' class='contentTab tab-pane active'>";
     else
         tabClass = "' class='contentTab tab-pane'>";

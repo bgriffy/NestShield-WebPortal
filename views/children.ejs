@@ -9,27 +9,26 @@
     <link rel="stylesheet" href="css/children.css">    
   </head>
   <body>
+    
     <!-- Bootstrap top-navbar-->
     <% include partials/navbar %>
 
-    <!-- Sidebar -->
-
+    <!--Bootstrap side-navbar-->
+    <% include partials/sidebar %>
+    
     <!--Main Content-->
     <div class = "middle-container">
       <table class='table table-striped'>
         <thead class='thead'>
           <tr>
-          <th scope='col'>Child Name</th>
-          <th scope='col'></th>
+            <th scope='col'>Child Name</th>
+            <th scope='col'></th>
           </tr>
         </thead>
         <tbody id = "children-table">
         </tbody>
       </table>
     </div>
-
-    <!--Footer Section-->
-    <!-- <% include partials/footer %> -->
 
     <!-- bootstrap and jquery scripts -->
     <% include partials/scripts %>

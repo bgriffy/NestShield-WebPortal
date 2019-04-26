@@ -2,7 +2,6 @@
 body {
   margin: 0;
   text-align: center;
-  position: relative;
   font-family: 'Arial', sans-serif;
   background-color: #C9B59A;
 }
@@ -33,16 +32,10 @@ hr{
 }
 
 /**************class selectors***********/
-.top-container {
-  background-color: #B4F9FF;
-  position: relative;
-  padding: 20px 0;
-  font-weight: bold;
-  margin-bottom: 500px;
-}
 .middle-container {
   background-color: auto;
   padding-bottom: 60px;
+  justify-content: center;
 }
 .bottom-container {
   background-color: #393e46;
@@ -81,8 +74,7 @@ hr{
   text-align: center;
   /* background-color: rgb(224, 209, 191); */
   background-color: rgb(245, 237, 226);
-  margin: 50px auto;
-  width: 40% !important; 
+  max-width: 100px;
 }
 
 table th {
@@ -101,6 +93,7 @@ table th {
 .navbar-custom{
   background-color: #64864A;
   color: #ffffff;
+  min-width: 100%;
 }
 .navbar-custom .navbar-brand,
 .navbar-custom .navbar-text {
@@ -123,34 +116,48 @@ table th {
   display: flex;
   width: 100%;
   align-items: stretch;
+  height: 100%;
+}
+.dropItem{
+  color: white;
+}
+
+
+/**************id selectors***********/
+#sidebar {
+  background: rgb(139, 185, 104);
+  color: #fff;
+  transition: all 0.3s;
+}
+
+#sidebar .sidebar-header {
+  padding: 20px;
+  background: rgb(139, 185, 104);
+}
+
+#sidebar ul.components {
+  padding: 20px 0;
+  border-bottom: 1px solid rgb(139, 185, 104);
+}
+
+#sidebar ul p {
+  color: #fff;
+  padding: 10px;
+}
+
+#sidebar ul li a {
+  padding: 10px;
+  font-size: 1.1em;
+  display: block;
+}
+#sidebar ul li a:hover {
+  color: #fff;
+  background: #B4F9FF;
 }
 #sidebar {
   min-width: 250px;
-  max-width: 250px;
-  min-height: 100vh;
-}
-
-#sidebar.active {
-  margin-left: -250px;
-}
-
-@media (max-width: 768px) {
-  #sidebar {
-      margin-left: -250px;
-  }
-  #sidebar.active {
-      margin-left: 0;
-  }
-  #wlTable{
-    margin-left: 0;
-    text-align: center;
-    max-width: 100px;
-  }
-}
-
-/**************id selectors***********/
-#inner-wrap {
-  padding-bottom: 300px;    /* Footer height */
+  height: 100%;
+  position: fixed;
 }
 #tab-content{
   margin-top: 25px;
@@ -164,11 +171,11 @@ table th {
   font-family: 'Laila', serif;
   font-weight: bold;
 }
-
 #dropLink:hover{
   color: rgb(139, 185, 104);
 }
 #wlTable{
-  margin-left: 30%;
-  text-align: center;
+  display: table;
+  margin: 50px auto;
 }
+
