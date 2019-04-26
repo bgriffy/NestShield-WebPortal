@@ -116,10 +116,8 @@ firebase.auth().onAuthStateChanged(fireBaseUser => {
                             //store child profile info into JS object, insert into profile array
                             let childProfile = {
                                 profileName: snapshot.child(currentAcct).child("ProfileName").val(),
-                                whiteList: Object.entries((snapshot.child(currentAcct).child(listKey).child("whitelist_entries").val())),
-                                listSize: snapshot.child(currentAcct).child("whitelist_size").val(),
+                                whiteList: Object.entries((snapshot.child(currentAcct).child("whitelist_entries").val())),                                listSize: snapshot.child(currentAcct).child("whitelist_size").val(),
                                 deviceName: snapshot.child(currentAcct).child("DeviceName").val(),
-                                whiteListKey: listKey,
                                 deviceID: currentDevice, 
                                 accountID: currentAcct
                             };
@@ -161,12 +159,10 @@ firebase.auth().onAuthStateChanged(fireBaseUser => {
             let deviceID = $(this).attr('data-deviceID');
             let entryID = $(this).attr('data-entryID');
             let accountID = $(this).attr('data-accountID');
-            let whiteListKey = $(this).attr('data-wlKey');
             console.log("deviceID: " + deviceID);
             console.log("entryID: " + entryID);
             console.log("accountID: " + accountID);
-            console.log("wlKey: " + whiteListKey);
-            removeFromWL(database, deviceID, entryID, accountID, whiteListKey); 
+            removeFromWL(database, deviceID, entryID, accountID); 
             $(this).closest('tr').remove();
           });
     }
@@ -248,7 +244,6 @@ function displayWL(childProfiles, childrenNames, deviceType, currentDevice)
                     deleteData = "id='windows-delete-btn'"
                     + "data-accountID = '" + childProfile.accountID + "'"
                     + "data-deviceID = '" + childProfile.deviceID + "'"
-                    + "data-wlKey = '" + childProfile.whiteListKey + "'"
                     + "data-entryID = '" + entry[0] + "'";
                 }
 
@@ -276,11 +271,10 @@ function displayWL(childProfiles, childrenNames, deviceType, currentDevice)
 }
 
 //function to remove a specified whitelist entry
-function removeFromWL(db, deviceID, entryID, userName, wlKey)
+function removeFromWL(db, deviceID, entryID, userName)
 {   
-    console.log("wlKey from remove:" + wlKey);
     ref = db.ref("devices").child(deviceID).child("accounts").child(userName)
-    .child(wlKey).child("whitelist_entries").child(entryID);
+    .child("whitelist_entries").child(entryID);
     
     ref.remove().then(function() {
         console.log("WhiteList entry removal successful.")
