@@ -23,6 +23,8 @@ const loginBtn = document.getElementById("login-btn");
 
 const signUpBtn = document.getElementById("signup-btn");
 
+let database = firebase.database();
+
 //automatically sign user out of current account
 firebase.auth().signOut();
 
@@ -46,7 +48,17 @@ let whiteList = [];
 //add a realtime authentication listener
 firebase.auth().onAuthStateChanged(fireBaseUser => {
   if(fireBaseUser)
-  {
+  { 
+    let uid = fireBaseUser.uid; 
+    let database = firebase.database();
+
+    let userRef = database.ref("users").child(uid);
+    userRef.set({
+        devices: "none",
+        email: userEmail.value,
+        name: userName.value,
+        uid: uid
+    });
     console.log(fireBaseUser);
     window.location = "/index";
     // alert("You are registered.")

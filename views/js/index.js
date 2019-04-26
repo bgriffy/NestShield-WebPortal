@@ -49,11 +49,18 @@ firebase.auth().onAuthStateChanged(fireBaseUser => {
        
         let uid = fireBaseUser.uid; 
         let database = firebase.database();
-
+        
         //get a data snapshot of the users devices
         let ref = database.ref("users").child(uid).child("devices"); 
         ref.once("value").then(function(data){
-            
+            if(data.val()==null)
+            {
+                console.log("You have no devices!");
+                alert("You have not added devices to this account yet. Please install Nestshield" +
+                "for Windows or Android.");
+                window.location="/login";
+                return;
+            }
             devices = Object.keys(data.val());
             deviceNames = Object.values(data.val());
             //loop through each device
