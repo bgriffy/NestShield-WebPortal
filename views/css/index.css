@@ -119,6 +119,34 @@ table th {
 .childHeader{
   margin:0 50px;
 }
+.wrapper {
+  display: flex;
+  width: 100%;
+  align-items: stretch;
+}
+#sidebar {
+  min-width: 250px;
+  max-width: 250px;
+  min-height: 100vh;
+}
+
+#sidebar.active {
+  margin-left: -250px;
+}
+
+@media (max-width: 768px) {
+  #sidebar {
+      margin-left: -250px;
+  }
+  #sidebar.active {
+      margin-left: 0;
+  }
+  #wlTable{
+    margin-left: 0;
+    text-align: center;
+    max-width: 100px;
+  }
+}
 
 /**************id selectors***********/
 #inner-wrap {
@@ -129,12 +157,10 @@ table th {
   max-height: 50px;
 }
 #deviceTabs{
-  margin-top: 25px;
   font-family: 'Laila', serif;
   font-weight: bolder;
 }
 #childTabs{
-  margin-top: 50px;
   font-family: 'Laila', serif;
   font-weight: bold;
 }
@@ -142,4 +168,7 @@ table th {
 #dropLink:hover{
   color: rgb(139, 185, 104);
 }
-
+#wlTable{
+  margin-left: 30%;
+  text-align: center;
+}

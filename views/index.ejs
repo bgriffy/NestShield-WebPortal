@@ -12,29 +12,85 @@
     <!-- Bootstrap top-navbar-->
     <% include partials/navbar %>
 
-    <!-- Sidebar -->
 
     <!--Main Content-->
-    <div class = "middle-container">
+    <div class = "wrapper">
 
-    <div class="container">
+      <nav id = "sidebar">
+          <div class="sidebar-header">
+              <h3>Bootstrap Sidebar</h3>
+          </div>
+  
+          <ul class="list-unstyled components">
+              <p>Dummy Heading</p>
+              <li class="active">
+                  <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Home</a>
+                  <ul class="collapse list-unstyled" id="homeSubmenu">
+                      <li>
+                          <a href="#">Home 1</a>
+                      </li>
+                      <li>
+                          <a href="#">Home 2</a>
+                      </li>
+                      <li>
+                          <a href="#">Home 3</a>
+                      </li>
+                  </ul>
+              </li>
+              <li>
+                  <a href="#">About</a>
+              </li>
+              <li>
+                  <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Pages</a>
+                  <ul class="collapse list-unstyled" id="pageSubmenu">
+                      <li>
+                          <a href="#">Page 1</a>
+                      </li>
+                      <li>
+                          <a href="#">Page 2</a>
+                      </li>
+                      <li>
+                          <a href="#">Page 3</a>
+                      </li>
+                  </ul>
+              </li>
+              <li>
+                  <a href="#">Portfolio</a>
+              </li>
+              <li>
+                  <a href="#">Contact</a>
+              </li>
+          </ul>
+      </nav>
 
-        <ul id ="childTabs" class="nav nav-tabs justify-content-center">
-            <!-- Children name headers go here-->
-        </ul>
+      <div id = "content">
+        <div class = "middle-container">
+          <nav class="navbar navbar-expand-lg navbar-light bg-light">
+          <div class="container-fluid">
 
-        <div id="tab-content">
-            <!--Contents in each tab go here-->
+          <button type="button" id="sidebarCollapse" class="btn btn-info">
+          <i class="fas fa-align-left"></i>
+          <span>Toggle Sidebar</span>
+          </button>
+          </div>
+          </div>
+          </nav>
+          <div id = "wlTable">
+            <ul id ="childTabs" class="nav nav-tabs justify-content-center">
+                <!-- Children name headers go here-->
+            </ul>
+
+            <div id="tab-content">
+                <!--Contents in each tab go here-->
+            </div>
+          </div>
         </div>
-    </div>
-
-    </div>
+      </div>
 
     </div>
 
     <!--Footer Section-->
     <!-- <% include partials/footer %> -->
-    </div>
 
     <!-- bootstrap and jquery scripts -->
     <% include partials/scripts %>
@@ -48,6 +104,13 @@
         console.log("button clicked...");
         $("a.dropLink").removeClass("active");
       });
+
+    $(document).ready(function () {
+
+    $('#sidebarCollapse').on('click', function () {
+        $('#sidebar').toggleClass('active');
+        });
+    });
     </script>
   </body>
 </html>
