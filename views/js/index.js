@@ -227,8 +227,6 @@ function displayWL(childProfiles, childrenNames, deviceType, currentDevice)
             + "<tr>"
             + "<th scope='col'>Process</th>"
             + "<th scope='col'></th>"
-            + "<th scope='col'>Options</th>"
-            + "<th scope='col'></th>"
             + "</tr>"
             + "</thead>"
             + "<tbody>";
@@ -249,8 +247,6 @@ function displayWL(childProfiles, childrenNames, deviceType, currentDevice)
 
                 printEntries += "<tr>" 
                 + "<td>"+entry[1]+"</td>"
-                + "<td><button type='button' class='btn btn-secondary btn-sm'>Monitor</button></td>"
-                + "<td><button type='button' class='btn btn-secondary btn-sm'>Restrict</button></td>"
                 //begin delete button
                 + "<td><button type='button' class='btn btn-secondary btn-sm'"
                 + deleteData
