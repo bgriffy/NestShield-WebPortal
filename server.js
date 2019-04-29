@@ -66,24 +66,7 @@ app.get('/children', function(req, res){
     res.render("children.ejs");
 });
 
-
-// //authentication middleware
-// function isAuthenticated(req, res, next)
-// {   
-
-// }
-
-
-// //request from user to view dashboard page
-// //grant if userr is authenticated
-// app.get('/dashboard', isAuthenticated, function(req, res){
-//     res.render("dashboard.ejs");
-// });
-
-// //store firebase admin credentials
-// let admin = require('firebase-admin');
-// let serviceAccount = require('');
-// let firebaseAdmin = admin.initializeApp({
-//     credential: admin.credential.cert(serviceAccount),
-//     databaseURL: ''
-// });
+//request to view child-management page
+app.get('/logout', function(req, res){
+    res.render("logout.ejs");
+});

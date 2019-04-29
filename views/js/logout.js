@@ -19,6 +19,10 @@ const userPass = document.getElementById("user-password");
 const loginBtn = document.getElementById("login-btn");
 const signUpBtn = document.getElementById("signup-btn");
 
+//automatically sign user out
+firebase.auth().signOut();
+alert("You have been signed out.");
+
 //Add event for login button
 loginBtn.addEventListener("click", function(){
   let uEmail = userEmail.value;
