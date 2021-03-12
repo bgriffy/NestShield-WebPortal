@@ -9,11 +9,11 @@
   "author": "Brent Griffin",
   "license": "ISC",
   "dependencies": {
-    "body-parser": "^1.18.3",
-    "ejs": "^2.6.1",
-    "express": "^4.16.4",
-    "firebase": "^5.9.1",
-    "firebase-admin": "^7.1.0",
-    "morgan": "^1.9.1"
+    "body-parser": "^1.19.0",
+    "ejs": "^2.7.4",
+    "express": "^4.17.1",
+    "firebase": "^5.11.1",
+    "firebase-admin": "^7.4.0",
+    "morgan": "^1.10.0"
   }
 }
