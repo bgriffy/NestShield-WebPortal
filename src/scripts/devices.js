@@ -51,7 +51,7 @@ firebase.auth().onAuthStateChanged(fireBaseUser => {
             printEntries = "<table class='table table-striped'>"
             + "<thead class='thead'>"
             + "<tr>"
-            + "<th scope='col'>Childs Name</th>"
+            + "<th scope='col'>Device Name</th>"
             + "<th scope='col'></th>"
             + "</tr>"
             + "</thead>"

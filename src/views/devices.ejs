@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dashboard</title>
+  <!--Head scripts-->
+  <% include partials/head %>
+    <link rel="stylesheet" href="/stylesheets/devices.css">
+</head>
+
+<body>
+  <!--Bootstrap side-navbar-->
+  <% include partials/sidebar %>
+
+    <!-- Bootstrap top-navbar-->
+    <% include partials/navbar %>
+
+      <!--Main Content-->
+      <div class="middle-container">
+        <div id="device-table">
+          <!--device table goes here-->
+        </div>
+      </div>
+
+      <!-- Bootstrap and jquery scripts -->
+      <% include partials/scripts %>
+
+      <!-- client-side script file -->
+      <script src="devices.js" charset="utf-8"></script>
+
+</body>
+
+</html>
