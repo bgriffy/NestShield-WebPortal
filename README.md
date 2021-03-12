@@ -15,3 +15,5 @@
 # How to run
 - This portal is not currently hosted on the web.
 - To demo the website, simply navigate to the root directory and type ```node server.js``` in the command line.
+
+# ![image](https://user-images.githubusercontent.com/11038998/111000550-3b460900-8350-11eb-8ad0-c9477b069d6d.png)
