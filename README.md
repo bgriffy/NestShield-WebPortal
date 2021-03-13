@@ -6,7 +6,6 @@
 - ***NOTE: These repositories are forked from my other group members. I didn't contribute to the Android or Windows applications for NestShield. 
 - This repo contains the web application version which I was solely responsible for developing.  
 - The web portal is the main point of entry where parents can utilize the NestShield software suite.
-- NestShield utilizes Firebase for its back-end. 
 
 # About this web portal
 - The web portal is where parents can view their child's activity and restrict access to sepcific apps.
