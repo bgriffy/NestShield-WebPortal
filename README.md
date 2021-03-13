@@ -1,9 +1,9 @@
 # About the NestShield suite
 - NestShield was a group student project written for the Software Engineering 1 course at Florida State University.  
 - This project also includes an Android application and a Windows service which both monitor the activity and processes on the device where the app is installed.
-- The Windows version of NestShield can be found here: https://github.com/zilonkaj/NestShield-Windows
-- The Android version of NestShield can be found here: https://github.com/Impinity/NestShield
-- ***NOTE: I do not own either of the repos for the Windows and Android versions of NestShield.
+- The Windows version of NestShield can be found here: https://github.com/bgriffy/NestShield-Windows-1
+- The Android version of NestShield can be found here: https://github.com/bgriffy/NestShield-Android
+- ***NOTE: These repositories are forked from my other group members. I didn't contribute to the Android or Windows applications for NestShield. 
 - This repo contains the web application version which I was solely responsible for developing.  
 - The web portal is the main point of entry where parents can utilize the NestShield software suite.
 - NestShield utilizes Firebase for its back-end. 
